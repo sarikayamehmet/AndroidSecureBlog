@@ -1,0 +1,18 @@
+#
+# This obfuscation dictionary contains strings that are already present
+# in many class files. Since these strings can be shared, the resulting
+# obfuscated class files will generally be a little bit more compact.＃这混淆字典包含已经存在的字符串＃在许多类文件。由于这些字符串可以共享，将所得＃混淆类文件一般会一点点更紧凑。
+# Usage:
+#     java -jar dexguard.jar ..... -obfuscationdictionary compact.txt
+#
+
+Code
+V
+I
+Z
+B
+C
+S
+F
+D
+L

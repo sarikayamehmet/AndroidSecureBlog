@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "dexguard.me.chago.dexguard"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+project.afterEvaluate {
+    tasks.getByName("compileDebugSources") {
+        it.doLast {
+            println "**********The dexGuard tool is running begin************"
+            def dexguardLibPath = "antlibs/DexGuard6.0.24/lib/dexguard.jar"
+            def injarsPath = "build/intermediates/classes/debug"
+            def outjarsPath = "build/intermediates/classes/dexguard"
+            def outjarsFile = file(outjarsPath)
+            if (outjarsFile.exists()) {
+                outjarsFile.delete()
+            }
+            def injarsFile = file(injarsPath)
+            def cmd = "java -jar ${dexguardLibPath} @app/dexguard-rules.pro -injars ${injarsFile.getAbsolutePath()} -outjars ${outjarsFile.getAbsolutePath()}"
+
+            println("混淆命令：" + cmd)
+            Process p = "${cmd}".execute()
+            p.waitFor()
+            def reader = new BufferedReader(new InputStreamReader(p.getInputStream()))
+            println "混淆命令返回:${reader.readLine()} ${p.exitValue()}"
+
+            delete injarsFile.getAbsolutePath()
+            outjarsFile.renameTo(injarsFile)
+
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+}

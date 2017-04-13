@@ -1,0 +1,64 @@
+#
+# This obfuscation dictionary contains reserved Java keywords. They can't
+# be used in Java source files, but they can be used in compiled class files.
+# Note that this hardly improves the obfuscation. Decent decompilers can
+# automatically replace reserved keywords, and the effect can fairly simply be
+# undone by obfuscating again with simpler names.
+#＃
+#＃这混淆字典有保留的Java关键字。他们不能
+#＃在Java源文件中使用，但是它们可以在编译的类文件中使用。
+#＃请注意，这几乎提高了模糊处理。体面反编译器可以
+#＃自动替换保留关键字，效果可以相当简单地是
+#＃用简单的名字再次混淆撤消。
+# Usage:
+#     java -jar dexguard.jar ..... -obfuscationdictionary keywords.txt
+#
+
+do
+if
+for
+int
+new
+try
+byte
+case
+char
+else
+goto
+long
+this
+void
+break
+catch
+class
+const
+final
+float
+short
+super
+throw
+while
+double
+import
+native
+public
+return
+static
+switch
+throws
+boolean
+default
+extends
+finally
+package
+private
+abstract
+continue
+strictfp
+volatile
+interface
+protected
+transient
+implements
+instanceof
+synchronized
